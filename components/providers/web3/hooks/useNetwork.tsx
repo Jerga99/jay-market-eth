@@ -15,6 +15,7 @@ const NETWORKS:any = {
     11155111: "Sepolia Test Network",
   }
 
+  //ISSUE 1
   const targetNetwork = NETWORKS[process.env.NEXT_PUBLIC_TARGET_CHAIN_ID as string]
 
 export const handler = (web3:any ) => () => {

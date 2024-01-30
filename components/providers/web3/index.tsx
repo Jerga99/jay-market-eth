@@ -13,7 +13,7 @@ const createWeb3State = ({web3, provider, contract, isLoading}:any) => {
   return {
     web3,
     provider,
-    contract, 
+    contract,
     isLoading,
     hooks: setupHooks({provider , web3 , contract })
   }
@@ -25,7 +25,8 @@ export default function Web3Provider({children}:any) {
     const loadProvider = async () => {
       const provider = await detectEthereumProvider()
       if (provider) {
-        const web3= new Web3(provider)
+        // Issue 2
+        const web3= new Web3(provider as any)
         const contract = await loadContract("CourseMarketplace", web3)
         setListeners(provider)
 
