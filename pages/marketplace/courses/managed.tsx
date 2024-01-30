@@ -33,13 +33,14 @@ const VerificationInput = ({onVerify}:any) => {
 }
 
 export default function ManagedCourses() {
-  const [ proofedOwnership, setProofedOwnership ] = useState({})
+  // Issue
+  const [ proofedOwnership, setProofedOwnership ] = useState<any>({})
   const { web3, contract } = useWeb3()
   const { account } = useAdmin({redirectTo: "/marketplace"})
   const [ searchedCourse, setSearchedCourse ] = useState(null)
   const { managedCourses } = useManagedCourses(account)
   const [ filters, setFilters ] = useState({state: "all"})
-  
+
   const verifyCourse = (email: any, {hash, proof}: { hash: any; proof: any; }) => {
 
     if(!email){
@@ -67,7 +68,8 @@ export default function ManagedCourses() {
       const result = await contract.methods[method](courseHash).send({from: account.data})
       return result
     }
-    catch(e) {
+    // Issue
+    catch(e: any) {
       throw new Error(e.message)
     }
   }
@@ -80,7 +82,7 @@ export default function ManagedCourses() {
   const deactivateCourse = async (courseHash: string | number) => {
     withToast(changeCourseState(courseHash, "deactivateCourse"))
   }
-  
+
   const searchCourse = async (hash: string) => {
     const re = /[0-9A-Fa-f]{6}/g;
 
@@ -90,7 +92,7 @@ export default function ManagedCourses() {
       if (course.owner !== "0x0000000000000000000000000000000000000000") {
         const normalized = normalizeOwnedCourse(web3)({hash}, course)
         setSearchedCourse(normalized)
-        return 
+        return
       }
     }
 
@@ -156,12 +158,13 @@ export default function ManagedCourses() {
 
     return course.state === filters.state
   })
-  .map((course: any) => renderCard(course) )
-  
+  // Issue
+  .map((course: any) => renderCard(course, false) )
+
   return (
     <>
       <MarketHeader />
-      <CourseFilter 
+      <CourseFilter
       filters={filters}onFilterSelect={(value: any) => setFilters({state: value})}
         onSearchSubmit={searchCourse}
       />

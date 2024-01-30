@@ -57,7 +57,8 @@ export default function Marketplace({courses}:any) {
         }
       ])
       return result
-    } catch(error) {
+      // Issue
+    } catch(error: any) {
       throw new Error(error.message)
     } finally {
       setBusyCourseId(null)
@@ -69,7 +70,8 @@ export default function Marketplace({courses}:any) {
       const result = await contract.methods.repurchaseCourse(
         courseHash
       ).send({from: account.data, value})
-      const index = ownedCourses.data.findIndex(c => c.id === course.id)
+      // Issue
+      const index = ownedCourses.data.findIndex((c: any) => c.id === course.id)
 
       if (index >= 0) {
         ownedCourses.data[index].state = "purchased"
@@ -79,7 +81,8 @@ export default function Marketplace({courses}:any) {
 
       }
       return result
-    } catch(error) {
+      // Issue
+    } catch(error: any) {
       throw new Error(error.message)
     } finally {
       setBusyCourseId(null)

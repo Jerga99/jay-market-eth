@@ -6,10 +6,10 @@ import { getAllCourses } from "@/components/ui/content/courses/fetcher"
 
 
 export default function Home({courses}:any) {
-  
+
   return (
     <>
-      
+
       <Hero />
       <CourseList
         courses={courses}
