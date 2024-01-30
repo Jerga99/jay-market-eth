@@ -12,7 +12,7 @@ const defaultOrder = {
 
 const _createFormState = (isDisabled = false, message =  "") => ({isDisabled, message})
 
-const createFormState = ({price, email, confirmationEmail, isNewPurchase}:any, hasAgreedTOS:any) => {
+const createFormState = ({price, email, confirmationEmail}:any, hasAgreedTOS:any, isNewPurchase: any) => {
   if (!price || Number(price) <= 0) {
     return _createFormState(true, "Price is not valid.")
   }
@@ -34,7 +34,7 @@ const createFormState = ({price, email, confirmationEmail, isNewPurchase}:any, h
   return _createFormState()
 }
 
-
+// Issue 6
 export default function OrderModal({course, onClose, onSubmit, isNewPurchase}:any) {
   const [isOpen, setIsOpen] = useState(false)
   const [order, setOrder] = useState(defaultOrder)
@@ -95,8 +95,9 @@ export default function OrderModal({course, onClose, onSubmit, isNewPurchase}:an
                 <input
                   disabled={!enablePrice}
                   value={order.price}
+                  // Issue 7
                   onChange={({target: {value}}) => {
-                    if (isNaN(value)) { return; }
+                    if (isNaN(parseInt(value))) { return; }
                     setOrder({
                       ...order,
                       price: value
